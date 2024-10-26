@@ -1,0 +1,5 @@
+task-tracker/
+scratch.txt
+venv/
+Cloudfiles/TaskTracker.pem
+Cloudfiles/node_exporter.*

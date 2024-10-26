@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    container_name: app_container
+    ports:
+      - "80:80"
+    volumes:
+      - ./tasks.db:/app/tasks.db  
+    networks:
+      - application-network
+
+  node_exporter:
+    image: prom/node-exporter:latest
+    container_name: node_exporter
+    ports:
+      - "9100:9100" 
+    volumes:
+      - /proc:/host/proc:ro                      # Access to the host's /proc directory
+      - /sys:/host/sys:ro                        # Access to the host's /sys directory
+      - /:/rootfs:ro                             # Access to the host's root filesystem
+      - /etc/node_exporter/tls:/etc/node_exporter/tls
+      - ./web.yml:/etc/node_exporter/web.yml     # Mount web config file
+    command:
+      - --web.config.file=/etc/node_exporter/web.yml   # Configure Node Exporter to use the TLS config file
+      - --path.procfs=/host/proc
+      - --path.sysfs=/host/sys
+      - --path.rootfs=/rootfs
+    networks:
+      - application-network
+
+networks:
+  application-network:
+    driver: bridge

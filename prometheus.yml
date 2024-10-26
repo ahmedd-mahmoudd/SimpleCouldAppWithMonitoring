@@ -1,0 +1,13 @@
+global:
+  scrape_interval: 15s
+
+scrape_configs:
+  - job_name: 'node_exporter_tls'
+    scheme: https
+    static_configs:
+      - targets: ['54.174.196.52:9100']
+    tls_config:
+      ca_file: /etc/prometheus/tls/node_exporter.crt
+      cert_file: /etc/prometheus/tls/node_exporter.crt
+      key_file: /etc/prometheus/tls/node_exporter.key
+      insecure_skip_verify: true  
