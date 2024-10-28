@@ -5,14 +5,20 @@ services:
     image: prom/prometheus:latest
     container_name: prometheus
     volumes:
-      - /mnt/d/AhmedMahmoud/vscode-work/TaskNouraScriptingassignment/prometheus.yml:/etc/prometheus/prometheus.yml
-      - /etc/node_exporter/tls:/etc/prometheus/tls            # Mount Node Exporter's TLS directory
+      - /mnt/d/AhmedMahmoud/vscode-work/TaskNouraScriptingassignment/prometheus.yml:/etc/prometheus/prometheus.yml.template
+      - /etc/node_exporter/tls:/etc/prometheus/tls
     ports:
       - "9090:9090"
     networks:
       - monitoring
-    command:
-      - '--config.file=/etc/prometheus/prometheus.yml'
+    env_file:
+      - ./prometheus.env  # Load the environment file
+    entrypoint:
+      - /bin/sh
+      - -c
+      - |
+        envsubst < /etc/prometheus/prometheus.yml.template > /etc/prometheus/prometheus.yml && \
+        exec prometheus --config.file=/etc/prometheus/prometheus.yml
 
   grafana:
     image: grafana/grafana:latest

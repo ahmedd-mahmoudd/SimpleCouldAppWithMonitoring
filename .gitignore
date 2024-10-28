@@ -3,3 +3,6 @@ scratch.txt
 venv/
 Cloudfiles/TaskTracker.pem
 Cloudfiles/node_exporter.*
+docker-certs/
+Cloudfiles/cloudip.sh
+prometheus.env

@@ -5,12 +5,11 @@ scrape_configs:
   - job_name: 'node_exporter_tls'
     scheme: https
     static_configs:
-      - targets: ['52.90.94.155:9100']
+      - targets: ['$NODE_EXPORTER_IP:9100']
     basic_auth:
       username: admin
-      password: #put your password here that you generated with htpasswd
+      password: $password
     tls_config:
       ca_file: /etc/prometheus/tls/node_exporter.crt
       cert_file: /etc/prometheus/tls/node_exporter.crt
       key_file: /etc/prometheus/tls/node_exporter.key
-      insecure_skip_verify: true  
