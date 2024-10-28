@@ -3,7 +3,7 @@
 # Variables
 KEY_PATH="TaskTracker.pem"     # Path to your EC2 key pair
 USER="ubuntu"                      # EC2 username
-HOST="54.174.196.52"         # EC2 public IP or DNS
+HOST="52.90.94.155"         # EC2 public IP or DNS
 LOCAL_PATH="."     # Path to the local code directory
 REMOTE_PATH="/home/ubuntu"     # Path on the EC2 instance where code will be placed
 DOCKER_COMPOSE_FILE="docker-compose.yml" # Docker Compose file name
